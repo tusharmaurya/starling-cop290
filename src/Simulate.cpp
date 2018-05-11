@@ -13,8 +13,8 @@ Simulate::Simulate()
 {
     this->boidsSize = 7.0;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    this->window_height = desktop.height/2;
-    this->window_width  = desktop.width/2;
+    this->window_height = desktop.height/1.5;
+    this->window_width  = desktop.width/1.5;
     this->window.create(sf::VideoMode(window_width, window_height, desktop.bitsPerPixel), "Simulater", sf::Style::None);
 }
 
@@ -29,9 +29,8 @@ void Simulate::Run()
         // Changing the Visual Properties of the shape
         // shape.setPosition(b.location.x, b.location.y); // Sets position of shape to random location that boid was set to.
         shape.setPosition(window_width, window_height); // Testing purposes, starts all shapes in the center of screen.
-        shape.setOutlineColor(sf::Color(0,255,0));
+        shape.setOutlineColor(sf::Color::Blue);
         shape.setFillColor(sf::Color::Blue);
-       // shape.setOutlineColor(sf::Color::White);
         shape.setOutlineThickness(1);
         shape.setRadius(boidsSize);
 
@@ -72,9 +71,9 @@ void Simulate::HandleInput()
 
         // Changing visual properties of newly created boid
         shape.setPosition(mouseCoords.x, mouseCoords.y);
-        shape.setOutlineColor(sf::Color(255, 0, 0));
-        shape.setFillColor(sf::Color(255, 0, 0));
-        shape.setOutlineColor(sf::Color::White);
+        shape.setOutlineColor(sf::Color(sf::Color::Blue));
+        shape.setFillColor(sf::Color(sf::Color::Blue));
+        shape.setOutlineColor(sf::Color::Blue);
         shape.setOutlineThickness(1);
         shape.setRadius(boidsSize);
 
@@ -86,7 +85,7 @@ void Simulate::HandleInput()
         window.draw(shapes[shapes.size()-1]);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
         // Gets mouse coordinates, sets that as the location of the boid and the shape
         sf::Vector2i mouseCoords = sf::Mouse::getPosition(window);
         Boid b(mouseCoords.x, mouseCoords.y, true);
@@ -96,7 +95,7 @@ void Simulate::HandleInput()
         shape.setPosition(mouseCoords.x, mouseCoords.y);
         shape.setOutlineColor(sf::Color(255, 0, 0));
         shape.setFillColor(sf::Color(255, 0, 0));
-        shape.setOutlineColor(sf::Color::White);
+        shape.setOutlineColor(sf::Color::Red);
         shape.setOutlineThickness(1);
         shape.setRadius(boidsSize);
 
