@@ -16,7 +16,7 @@ To run the simulation, `cd` into the `src` folder and run `make` to produce an e
 ```
 
 You can add Boids and Obstacles. To add a boid, click the left mouse button. To add an obstacle, press the right mouse button.
-To Exit with the <kbd>esc</kbd>.
+To Exit press <kbd>esc</kbd>.
 
 ## Issues and Improvements
 - Fine tuning of velocity and force variables, along with line of sight, cohesion and steering factors to get most natural behavior. In the current version, the behavior is not very close to the natural behavior of real starling flocks.
