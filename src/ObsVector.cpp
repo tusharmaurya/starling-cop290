@@ -1,10 +1,6 @@
 #include <math.h>
 #include "ObsVector.h"
 
-// =================================================== //
-// ======== ObsVector Functions from ObsVector.h ========= //
-// =================================================== //
-
 #define PI 3.141592635
 
 // Sets values of x and y for ObsVector
@@ -125,7 +121,7 @@ float ObsVector::angleBetween(ObsVector v)
     double dot = x * v.x + y * v.y;
     double v1mag = sqrt(x * x + y * y);
     double v2mag = sqrt(v.x * v.x + v.y * v.y);
-    double amt = dot / (v1mag * v2mag); //Based of definition of dot product
+    double amt = dot / (v1mag * v2mag); 
     //dot product / product of magnitudes gives amt
     if (amt <= -1) {
         return PI;
