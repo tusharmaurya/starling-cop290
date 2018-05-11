@@ -7,8 +7,8 @@
 
 
 sf::VideoMode desktopTemp = sf::VideoMode::getDesktopMode();
-const int window_height = desktopTemp.height/2;
-const int window_width = desktopTemp.width/2;
+const int window_height = desktopTemp.height/1.5;
+const int window_width = desktopTemp.width/1.5;
 
 #define w_height window_height
 #define w_width window_width
@@ -20,7 +20,7 @@ Boid::Boid(float x, float y)
     acceleration = ObsVector(0, 0);
     velocity = ObsVector(rand()%3 - 2, rand()%3 - 2);
     location = ObsVector(x, y);
-    maxSpeed = 0.5;
+    maxSpeed = 2.5;
     maxForce = 0.5;
 }
 
@@ -32,7 +32,7 @@ Boid::Boid(float x, float y, bool Obscheck)
         maxForce = 0;
         velocity = ObsVector(0,0);
     } else {
-        maxSpeed = 0.5;
+        maxSpeed = 2.5;
         maxForce = 0.5;
         velocity = ObsVector(rand()%3 - 2, rand()%3 - 2);
     }
@@ -67,23 +67,12 @@ ObsVector Boid::Separation(vector<Boid> boids)
             steer.addVector(diff);
             count++;
         }
-        // If current boid is a Obstacle and the boid we're looking at is also
-        // a Obstacle, then separate only slightly
-        if ((d > 0) && (d < desiredseparation+50) && Obstacle == true
-            && boids[i].Obstacle == true) {
-            ObsVector pred2pred(0, 0);
-            pred2pred = pred2pred.subTwoVector(location, boids[i].location);
-            pred2pred.normalize();
-            pred2pred.divScalar(d);
-            steer.addVector(pred2pred);
-            count++;
-        }
+
         // If current boid is not a Obstacle, but the boid we're looking at is
         // a Obstacle, then create a large separation ObsVector
-        else if ((d > 0) && (d < desiredseparation+50) && boids[i].Obstacle == true) {
+        else if ((d > 0) && (d < desiredseparation+5) && boids[i].Obstacle == true) {
             ObsVector pred(0, 0);
             pred = pred.subTwoVector(location, boids[i].location);
-            pred.mulScalar(900);
             steer.addVector(pred);
             count++;
         }
