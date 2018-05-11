@@ -1,6 +1,6 @@
 # Boids
 
-This project tries to simulate Starling murmeration. We simulated them using boids in 2D plane. The basic rules it follows are:
+This project tries to simulate Starling murmuration. We simulated them using boids in 2D plane. The basic rules it follows are:
 
    Separation: steer to avoid crowding local flockmates
    Alignment: steer towards the average heading of local flockmates
