@@ -5,8 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "Boid.h"
 
-// Global Variables for borders()
-// desktopTemp gets screen resolution of PC running the program
+
 sf::VideoMode desktopTemp = sf::VideoMode::getDesktopMode();
 const int window_height = desktopTemp.height/2;
 const int window_width = desktopTemp.width/2;
@@ -15,9 +14,6 @@ const int window_width = desktopTemp.width/2;
 #define w_width window_width
 #define PI 3.141592635
 
-// =============================================== //
-// ======== Boid Functions from Boid.h =========== //
-// =============================================== //
 
 Boid::Boid(float x, float y)
 {
@@ -96,7 +92,7 @@ ObsVector Boid::Separation(vector<Boid> boids)
     if (count > 0)
         steer.divScalar((float)count);
     if (steer.magnitude() > 0) {
-        // Steering = Desired - Velocity
+        
         steer.normalize();
         steer.mulScalar(maxSpeed);
         steer.subVector(velocity);
@@ -106,8 +102,7 @@ ObsVector Boid::Separation(vector<Boid> boids)
 }
 
 // Alignment
-// Calculates the average velocity of boids in the field of vision and
-// manipulates the velocity of the current boid in order to match it
+
 ObsVector Boid::Alignment(vector<Boid> Boids)
 {
     float neighbordist = 50; // Field of vision
@@ -138,8 +133,7 @@ ObsVector Boid::Alignment(vector<Boid> Boids)
 }
 
 // Cohesion
-// Finds the average location of nearby boids and manipulates the
-// steering force to move in that direction.
+
 ObsVector Boid::Cohesion(vector<Boid> Boids)
 {
     float neighbordist = 50;
@@ -176,8 +170,6 @@ ObsVector Boid::seek(ObsVector v)
     return acceleration;
 }
 
-// Modifies velocity, location, and resets acceleration with values that
-// are given by the three laws.
 void Boid::update()
 {
     //To make the slow down not as abrupt
@@ -191,9 +183,7 @@ void Boid::update()
     acceleration.mulScalar(0);
 }
 
-// Run flock() on the flock of boids.
-// This applies the three rules, modifies velocities accordingly, updates data,
-// and corrects boids which are sitting outside of the SFML window
+
 void Boid::run(vector <Boid> v)
 {
     flock(v);
@@ -201,7 +191,6 @@ void Boid::run(vector <Boid> v)
     borders();
 }
 
-// Applies the three laws to the flock of boids
 void Boid::flock(vector<Boid> v)
 {
     ObsVector sep = Separation(v);
@@ -209,7 +198,7 @@ void Boid::flock(vector<Boid> v)
     ObsVector coh = Cohesion(v);
     // Arbitrarily weight these forces
     sep.mulScalar(1.5);
-    ali.mulScalar(1.0); // Might need to alter weights for different characteristics
+    ali.mulScalar(1.0); 
     coh.mulScalar(1.0);
     // Add the force vectors to acceleration
     applyForce(sep);
@@ -217,8 +206,7 @@ void Boid::flock(vector<Boid> v)
     applyForce(coh);
 }
 
-// Checks if boids go out of the window and if so, wraps them around to
-// the other side.
+// Checks if boids go out of the window
 void Boid::borders()
 {
     if (location.x < 0)    location.x += w_width;
@@ -227,8 +215,6 @@ void Boid::borders()
     if (location.y > w_height) location.y -= w_height;
 }
 
-// Calculates the angle for the velocity of a boid which allows the visual
-// image to rotate in the direction that it is going in.
 float Boid::angle(ObsVector v)
 {
     // From the definition of the dot product
