@@ -18,16 +18,11 @@ Simulate::Simulate()
     this->window.create(sf::VideoMode(window_width, window_height, desktop.bitsPerPixel), "Simulater", sf::Style::None);
 }
 
-// Run the simulation. Run creates the boids that we'll display, checks for user
-// input, and updates the view
 void Simulate::Run()
 {
     for (int i = 0; i < 50; i++) {
         Boid b(window_width /3, window_height / 3); // Starts all boids in the center of the screen
         sf::CircleShape shape(8, 3);
-
-        // Changing the Visual Properties of the shape
-        // shape.setPosition(b.location.x, b.location.y); // Sets position of shape to random location that boid was set to.
         shape.setPosition(window_width, window_height); // Testing purposes, starts all shapes in the center of screen.
         shape.setOutlineColor(sf::Color::Blue);
         shape.setFillColor(sf::Color::Blue);
@@ -48,8 +43,7 @@ void Simulate::HandleInput()
 {
     sf::Event event;
     while (window.pollEvent(event)) {
-        // "close requested" event: we close the window
-        // Implemented alternate ways to close the window. (Pressing the escape, X, and BackSpace key also close the program.)
+      
         if ((event.type == sf::Event::Closed) ||
             (event.type == sf::Event::KeyPressed &&
              event.key.code == sf::Keyboard::Escape) ||
@@ -69,7 +63,7 @@ void Simulate::HandleInput()
         Boid b(mouseCoords.x, mouseCoords.y, false);
         sf::CircleShape shape(10,3);
 
-        // Changing visual properties of newly created boid
+        
         shape.setPosition(mouseCoords.x, mouseCoords.y);
         shape.setOutlineColor(sf::Color(sf::Color::Blue));
         shape.setFillColor(sf::Color(sf::Color::Blue));
@@ -81,17 +75,17 @@ void Simulate::HandleInput()
         flock.addBoid(b);
         shapes.push_back(shape);
 
-        // New Shape is drawn
+      
         window.draw(shapes[shapes.size()-1]);
     }
 
+
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        // Gets mouse coordinates, sets that as the location of the boid and the shape
         sf::Vector2i mouseCoords = sf::Mouse::getPosition(window);
         Boid b(mouseCoords.x, mouseCoords.y, true);
         sf::CircleShape shape(10,10);
-        //usleep(3000000);
-        // Changing visual properties of newly created boid
+      
+       
         shape.setPosition(mouseCoords.x, mouseCoords.y);
         shape.setOutlineColor(sf::Color(255, 0, 0));
         shape.setFillColor(sf::Color(255, 0, 0));
@@ -103,7 +97,7 @@ void Simulate::HandleInput()
         flock.addBoid(b);
         shapes.push_back(shape);
 
-        // New Shape is drawn
+      
         window.draw(shapes[shapes.size()-1]);
     }
 }
@@ -116,10 +110,7 @@ void Simulate::Render()
     for (int i = 0; i < shapes.size(); i++) {
         window.draw(shapes[i]);
 
-        //cout << "Boid "<< i <<" Coordinates: (" << shapes[i].getPosition().x << ", " << shapes[i].getPosition().y << ")" << endl;
-        //cout << "Boid Code " << i << " Location: (" << flock.getBoid(i).location.x << ", " << flock.getBoid(i).location.y << ")" << endl;
-
-        // Matches up the location of the shape to the boid
+    
         shapes[i].setPosition(flock.getBoid(i).location.x, flock.getBoid(i).location.y);
 
         // Calculates the angle where the velocity is pointing so that the triangle turns towards it.
