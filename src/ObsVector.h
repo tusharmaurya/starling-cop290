@@ -5,10 +5,7 @@ using namespace std;
 #ifndef OBSVECTOR_H_
 #define OBSVECTOR_H_
 
-// The ObsVector class implements Euclidian vectors -- that is, each vector has
-// both a magnitude and a direction. We use ObsVectors for implementing movement
-// and the three Boid rules -- cohesion, separation, and matching velocity
-// through the use of acceleration, force, and velocity vectors.
+
 
 class ObsVector {
 
@@ -25,10 +22,9 @@ public:
         y = yComp;
     }
 
-    //Mutator Functions
+
     void set(float x, float y);
 
-    //Scalar functions scale a vector by a float
     void addVector(ObsVector v);
     void addScalar(float x);
 
@@ -44,7 +40,7 @@ public:
 
     void limit(double max);
 
-    //Calculating Functions
+  
     float distance(ObsVector v);
     float dotProduct(ObsVector v);
     float magnitude();
