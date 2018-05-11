@@ -8,9 +8,7 @@
 #ifndef Simulate_H
 #define Simulate_H
 
-// Simulate handles the instantiation of a flock of boids, Simulate input, asks the
-// model to compute the next step in the stimulation, and handles all of the
-// program's interaction with SFML. 
+
 
 class Simulate {
 private:
